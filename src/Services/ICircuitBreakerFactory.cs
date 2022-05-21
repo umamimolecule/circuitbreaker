@@ -8,5 +8,7 @@ namespace CircuitBreakerService.Services
         Task<ICircuitBreaker> GetCircuitBreakerAsync(string key);
         
         Task<IEnumerable<ICircuitBreaker>> GetAllCircuitBreakersAsync();
+        
+        Task ClearAllCircuitBreakersAsync();
     }
 }

@@ -69,6 +69,16 @@ namespace CircuitBreakerService.Services
             }
         }
 
+        public Task ClearAllCircuitBreakersAsync()
+        {
+            lock (this.cache)
+            {
+                this.cache.Clear();
+                this.cacheTimestamps.Clear();
+                return Task.CompletedTask;
+            }
+        }
+
         private ICircuitBreaker CreateCircuitBreaker(string key) => new ConsecutiveFailureCircuitBreaker(consecutiveFailureCircuitBreakerLogger, key);
     }
 }

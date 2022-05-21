@@ -52,6 +52,18 @@ GET /api/status/:key
 Notes
 - `circuitState` is one of: `Open`, `Closed`, `HalfOpen`
 
+### Delete all statuses
+
+```
+DELETE /api/status
+```
+
+#### Response
+
+```
+200 OK
+```
+
 ### Record a call failure for key
 
 ```

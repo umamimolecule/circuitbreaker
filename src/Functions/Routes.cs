@@ -5,6 +5,8 @@
         public const string GetStatus = "status/{key}";
         
         public const string GetStatuses = "status";
+
+        public const string ResetStatuses = "status";
         
         public const string CallFailure = "calls/{key}/failure";
         
