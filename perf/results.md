@@ -2,7 +2,7 @@
 
 ## 2022-05-22
 
-.Net 6.0, script run locally connecting to Azure.
+### .Net 6.0, script run locally connecting to Azure.
 
 | App service plan | Key count | Req/min | Req duration (avg, ms) | Req duration (p95, ms) | Req duration (max, ms) | # failures |
 | ---------------- | --------- | ------- | ---------------------- | ---------------------- | ---------------------- | ---------- |
@@ -21,7 +21,7 @@
 
 ## 2022-05-21
 
-.Net Core 3.1, script run locally connecting to Azure.
+### .Net Core 3.1, script run locally connecting to Azure.
 
 | App service plan | Key count | Req/min | Req duration (avg, ms) | Req duration (p95, ms) | Req duration (max, ms) | # failures |
 | ---------------- | --------- | ------- | ---------------------- | ---------------------- | ---------------------- | ---------- |
