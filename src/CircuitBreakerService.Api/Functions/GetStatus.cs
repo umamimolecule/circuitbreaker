@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CircuitBreakerService.CircuitBreaker;
-using CircuitBreakerService.Services;
+using CircuitBreakerService.Core.Models;
+using CircuitBreakerService.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -12,33 +11,34 @@ using Newtonsoft.Json.Converters;
 
 namespace CircuitBreakerService.Functions
 {
-    public class GetStatuses
+    public class GetStatus
     {
         private readonly ICircuitBreakerFactory circuitBreakerFactory;
 
-        public GetStatuses(ICircuitBreakerFactory circuitBreakerFactory)
+        public GetStatus(ICircuitBreakerFactory circuitBreakerFactory)
         {
             this.circuitBreakerFactory = circuitBreakerFactory;
         }
 
-        [FunctionName("GetStatuses")]
+        [FunctionName("GetStatus")]
         public async Task<IActionResult> RunAsync(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = Routes.GetStatuses)] HttpRequestMessage req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = Routes.GetStatus)] HttpRequestMessage req,
+            [FromRoute] string key)
         {
-            var circuitBreakers = await this.circuitBreakerFactory.GetAllCircuitBreakersAsync();
-
-            List<ResponseDto> response = new List<ResponseDto>();
-            foreach (var circuitBreaker in  circuitBreakers)
+            var circuitBreaker = await this.circuitBreakerFactory.GetCircuitBreakerAsync(key);
+            if (circuitBreaker == null)
             {
-                var (circuitState, retryAfter) = await circuitBreaker.GetCircuitStateAsync();
-                
-                response.Add(new ResponseDto()
-                {
-                    Key = circuitBreaker.Key,
-                    RetryAfterInSeconds = retryAfter.HasValue ? Math.Round(retryAfter.Value.TotalSeconds, 0) : (double?)null,
-                    CircuitState = circuitState,
-                });
+                return new NotFoundResult();
             }
+            
+            var (circuitState, retryAfter) = await circuitBreaker.GetCircuitStateAsync();
+
+            var response = new ResponseDto()
+            {
+                Key = key,
+                RetryAfterInSeconds = retryAfter.HasValue ? Math.Round(retryAfter.Value.TotalSeconds, 0) : (double?) null,
+                CircuitState = circuitState,
+            };
 
             return new OkObjectResult(response);
         }
@@ -47,7 +47,7 @@ namespace CircuitBreakerService.Functions
         {
             [JsonProperty("key")]
             public string Key { get; set; }
-
+        
             [JsonProperty("retryAfterInSeconds", NullValueHandling = NullValueHandling.Ignore)]
             public double? RetryAfterInSeconds { get; set; }
             

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CircuitBreakerService.CircuitBreaker;
+using CircuitBreakerService.Core.Models;
 
-namespace CircuitBreakerService.Services
+namespace CircuitBreakerService.Core.Services
 {
     public interface ICircuitBreaker
     {

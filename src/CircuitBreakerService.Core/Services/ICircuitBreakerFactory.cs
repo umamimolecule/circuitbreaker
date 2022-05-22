@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CircuitBreakerService.Services
+namespace CircuitBreakerService.Core.Services
 {
     public interface ICircuitBreakerFactory
     {

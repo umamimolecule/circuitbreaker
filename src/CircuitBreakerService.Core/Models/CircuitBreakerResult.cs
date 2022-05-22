@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CircuitBreakerService.CircuitBreaker
+﻿namespace CircuitBreakerService.Core.Models
 {
     public struct CircuitBreakerResult
     {

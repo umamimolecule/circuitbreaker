@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Timers;
-using CircuitBreakerService.Extensions;
+﻿using System.Timers;
+using CircuitBreakerService.Core.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace CircuitBreakerService.Services
+namespace CircuitBreakerService.Core.Services
 {
     public class InMemoryCircuitBreakerFactory : ICircuitBreakerFactory
     {
         private readonly ILogger<ConsecutiveFailureCircuitBreaker> consecutiveFailureCircuitBreakerLogger; 
         private readonly Dictionary<string, ICircuitBreaker> cache = new Dictionary<string, ICircuitBreaker>();
         private readonly Dictionary<string, DateTime> cacheTimestamps = new Dictionary<string, DateTime>();
-        private Timer cacheCleanupTimer;
+        private System.Timers.Timer cacheCleanupTimer;
         private TimeSpan cacheLifetime;
 
         public InMemoryCircuitBreakerFactory(
@@ -23,7 +19,7 @@ namespace CircuitBreakerService.Services
             
             this.cacheLifetime = TimeSpan.FromMinutes(1);
 
-            this.cacheCleanupTimer = new Timer();
+            this.cacheCleanupTimer = new System.Timers.Timer();
             this.cacheCleanupTimer.Interval = TimeSpan.FromSeconds(30).TotalMilliseconds;
             this.cacheCleanupTimer.Enabled = true;
             this.cacheCleanupTimer.AutoReset = true;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CircuitBreakerService.CircuitBreaker;
+using CircuitBreakerService.Core.Models;
 using Microsoft.Extensions.Logging;
 
-namespace CircuitBreakerService.Services
+namespace CircuitBreakerService.Core.Services
 {
     public class ConsecutiveFailureCircuitBreaker : ICircuitBreaker
     {

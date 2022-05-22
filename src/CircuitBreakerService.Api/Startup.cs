@@ -1,5 +1,4 @@
-﻿using CircuitBreakerService.RateLimiting;
-using CircuitBreakerService.Services;
+﻿using CircuitBreakerService.Core.Services;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,8 +10,6 @@ namespace CircuitBreakerService
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddHttpClient();
-            builder.Services.AddSingleton<IRateLimitedService, RateLimitedService>();
             builder.Services.AddSingleton<ICircuitBreakerFactory, InMemoryCircuitBreakerFactory>();
         }
     }

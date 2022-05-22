@@ -1,4 +1,4 @@
-﻿namespace CircuitBreakerService.CircuitBreaker
+﻿namespace CircuitBreakerService.Core.Models
 {
     public enum CircuitState
     {

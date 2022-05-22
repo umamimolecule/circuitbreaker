@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CircuitBreakerService.Extensions
+namespace CircuitBreakerService.Core.Extensions
 {
     public static class DictionaryExtensions
     {

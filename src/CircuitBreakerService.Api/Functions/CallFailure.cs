@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using CircuitBreakerService.Extensions;
-using CircuitBreakerService.Services;
+using CircuitBreakerService.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
