@@ -3,6 +3,7 @@ import { clearCircuitBreaker, endpoints, getUrl } from './api.js';
 import { generateRandomKeys, getRandomItem } from './utils.js';
 
 const keyCount = __ENV.KEY_COUNT || 1000;
+const vus = __ENV.VUS || 200;
 
 export const options = {
   scenarios: {
@@ -11,8 +12,8 @@ export const options = {
       duration: '1m',
       rate: __ENV.RATE || 2000,
       timeUnit: '1m',
-      maxVUs: 2000,
-      preAllocatedVUs: 2000,
+      maxVUs: vus,
+      preAllocatedVUs: vus,
     },
   },
 };
