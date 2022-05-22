@@ -18,8 +18,22 @@ function uuidv4() {
   });
 }
 
+function isEnvVarTrue(name) {
+  const value = __ENV[name];
+  if (!value) {
+    return false;
+  }
+
+  if (value.toString().toLowerCase() === 'false') {
+    return false;
+  }
+
+  return true;
+}
+
 module.exports = {
   generateRandomKeys,
   getRandomItem,
+  isEnvVarTrue,
   uuidv4,
 };

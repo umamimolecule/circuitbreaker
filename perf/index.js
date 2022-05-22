@@ -2,17 +2,17 @@ import http from 'k6/http';
 import { clearCircuitBreaker, endpoints, getUrl } from './api.js';
 import { generateRandomKeys, getRandomItem } from './utils.js';
 
-const keyCount = 1000;
+const keyCount = __ENV.KEY_COUNT || 1000;
 
 export const options = {
   scenarios: {
     loadTest: {
       executor: 'constant-arrival-rate',
-      duration: '1s',
-      rate: 1000,
+      duration: '1m',
+      rate: __ENV.RATE || 2000,
       timeUnit: '1m',
-      maxVUs: 1000,
-      preAllocatedVUs: 1000,
+      maxVUs: 2000,
+      preAllocatedVUs: 2000,
     },
   },
 };

@@ -1,6 +1,14 @@
 import http from 'k6/http';
+import { isEnvVarTrue } from './utils.js';
 
-const baseUrl = 'http://localhost:7071';
+const scheme = isEnvVarTrue('USE_HTTP') ? 'http' : 'https';
+const hostname = __ENV.HOSTNAME;
+
+if (!hostname) {
+  throw new Error('HOSTNAME environment variable must be supplied');
+}
+
+const baseUrl = `${scheme}://${hostname}`;
 
 const clearEndpoint = {
   method: 'delete',
