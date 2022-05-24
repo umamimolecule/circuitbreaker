@@ -14,6 +14,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CircuitBreakerService.Core"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitbreakerService.Sdk", "src\CircuitbreakerService.Sdk\CircuitbreakerService.Sdk.csproj", "{8C96C542-58CD-4ACC-B9F0-949DB0A625EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitBreakerService.Core.Benchmark", "src\CircuitBreakerService.Core.Benchmark\CircuitBreakerService.Core.Benchmark.csproj", "{A1CCF05F-41E1-4E57-BB6E-87F680DA0E2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Performance", "Performance", "{53B41350-CD85-49AF-82ED-2C9CDC6E50F0}"
+	ProjectSection(SolutionItems) = preProject
+		perf\.prettierrc = perf\.prettierrc
+		perf\api.js = perf\api.js
+		perf\DeployingToVM.md = perf\DeployingToVM.md
+		perf\index.js = perf\index.js
+		perf\README.md = perf\README.md
+		perf\results.md = perf\results.md
+		perf\utils.js = perf\utils.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +45,10 @@ Global
 		{8C96C542-58CD-4ACC-B9F0-949DB0A625EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C96C542-58CD-4ACC-B9F0-949DB0A625EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C96C542-58CD-4ACC-B9F0-949DB0A625EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CCF05F-41E1-4E57-BB6E-87F680DA0E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CCF05F-41E1-4E57-BB6E-87F680DA0E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CCF05F-41E1-4E57-BB6E-87F680DA0E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CCF05F-41E1-4E57-BB6E-87F680DA0E2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

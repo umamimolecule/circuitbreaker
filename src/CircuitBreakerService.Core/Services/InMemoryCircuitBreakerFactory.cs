@@ -1,5 +1,4 @@
-﻿using System.Timers;
-using CircuitBreakerService.Core.Extensions;
+﻿using CircuitBreakerService.Core.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace CircuitBreakerService.Core.Services

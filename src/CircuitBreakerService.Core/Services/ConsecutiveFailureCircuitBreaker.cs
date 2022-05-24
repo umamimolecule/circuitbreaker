@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using CircuitBreakerService.Core.Models;
+﻿using CircuitBreakerService.Core.Models;
 using Microsoft.Extensions.Logging;
 
 namespace CircuitBreakerService.Core.Services
@@ -35,17 +33,18 @@ namespace CircuitBreakerService.Core.Services
         
         public string Key { get; }
 
-        public async Task<CircuitBreakerResult> IsExecutionPermittedAsync()
+        public Task<CircuitBreakerResult> IsExecutionPermittedAsync()
         {
-            await Task.CompletedTask;
+            CircuitBreakerResult result;
             
             switch (this.circuitState)
             {
                 case CircuitState.Closed:
-                    return new CircuitBreakerResult()
+                    result = new CircuitBreakerResult()
                     {
                         IsExecutionPermitted = true,
                     };
+                    break;
 
                 case CircuitState.Open:
                 case CircuitState.HalfOpen:
@@ -61,29 +60,31 @@ namespace CircuitBreakerService.Core.Services
 
                             this.logger.LogDebug("[Key={0}] Permitting a test execution in half-open state, set brokenUntil to {1:o}", this.Key, this.brokenUntil);
 
-                            return new CircuitBreakerResult()
+                            result = new CircuitBreakerResult()
                             {
                                 IsExecutionPermitted = true,
                             };
                         }
 
                         // Not time yet to test the circuit again.
-                        return new CircuitBreakerResult()
+                        result = new CircuitBreakerResult()
                         {
                             IsExecutionPermitted = false,
                             RetryAfter = this.brokenUntil - DateTime.UtcNow,
                         };
                     }
 
+                    break;
+
                 default:
                     throw new InvalidOperationException();
             }
+
+            return Task.FromResult(result);
         }
 
-        public async Task<CircuitState> RecordSuccessAsync()
+        public Task<CircuitState> RecordSuccessAsync()
         {
-            await Task.CompletedTask;
-
             lock (Semaphore)
             {
                 this.consecutiveFailureCount = 0;
@@ -94,13 +95,12 @@ namespace CircuitBreakerService.Core.Services
                     this.logger.LogDebug("[Key={0}] Circuit re-closed, set brokenUntil to {1:o}", this.Key, this.brokenUntil);
                 }
 
-                return this.circuitState;
+                return Task.FromResult(this.circuitState);
             }
         }
 
-        public async Task<CircuitState> RecordFailureAsync(TimeSpan? retryAfter)
+        public Task<CircuitState> RecordFailureAsync(TimeSpan? retryAfter)
         {
-            await Task.CompletedTask;
             lock (Semaphore)
             {
                 this.consecutiveFailureCount++;
@@ -131,13 +131,12 @@ namespace CircuitBreakerService.Core.Services
                     }
                 }
 
-                return this.circuitState;
+                return Task.FromResult(this.circuitState);
             }
         }
 
-        public async Task<(CircuitState, TimeSpan?)> GetCircuitStateAsync()
+        public Task<(CircuitState, TimeSpan?)> GetCircuitStateAsync()
         {
-            await Task.CompletedTask;
             lock (Semaphore)
             {
                 TimeSpan? breakDuration = null;
@@ -150,7 +149,7 @@ namespace CircuitBreakerService.Core.Services
                     }
                 }
 
-                return (this.circuitState, breakDuration);
+                return Task.FromResult((this.circuitState, breakDuration));
             }
         }
 

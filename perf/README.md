@@ -1,5 +1,7 @@
 # Performance test
 
+This is a constant-rate performance test to measure response times for the circuit breaker service.
+
 ## Requirements
 
 - Install K6 (https://k6.i)
@@ -11,7 +13,7 @@
 3. Run the following command:
 
 ```
-k6 run ./index.js -e HOSTNAME=myhostname.com [--duration 60s] [-e RATE=2000] [-e KEY_COUNT=1000] [-e HOSTNAME=myhostname.com] [-e USE_HTTP=false] [-e VUS=200]
+k6 run ./index.js -e HOSTNAME=myhostname.com [--duration 60s] [-e RATE=2000] [-e KEY_COUNT=1000] [-e USE_HTTP=false] [-e VUS=200]
 ```
 
 Where:
