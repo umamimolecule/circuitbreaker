@@ -4,7 +4,7 @@ This is a constant-rate performance test to measure response times for the circu
 
 ## Requirements
 
-- Install K6 (https://k6.i)
+- Install K6 (https://k6.io)
 
 ## Usage
 
